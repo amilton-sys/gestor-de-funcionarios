@@ -5,8 +5,6 @@ import exception.FuncionarioNaoExistente;
 import model.Funcao;
 import model.Funcionario;
 
-import java.math.BigDecimal;
-import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
@@ -15,33 +13,9 @@ import java.util.stream.Collectors;
 
 public class GestorService {
     private List<Funcionario> funcionarios;
-    private BigDecimal aumento;
-    private Map<Funcao, List<Funcionario>> funcionariosMap;
 
     public GestorService() {
         this.funcionarios = new ArrayList<>();
-        this.aumento = new BigDecimal("0.1");
-        this.funcionariosMap = new HashMap<>();
-    }
-
-    public void imprimeQuantidadeSalariosMinimos() {
-        BigDecimal salarioMinimo = new BigDecimal("1212.00");
-        funcionarios.forEach(funcionario -> {
-            BigDecimal quantidade = funcionario.getSalario().divideToIntegralValue(salarioMinimo);
-            System.out.println(funcionario.getNome());
-            System.out.println("Quantidade de salarios minimos: " + quantidade);
-            System.out.println("--------------------------");
-        });
-    }
-
-    public void imprimeTotalSalarios() {
-        BigDecimal totalSalarios = BigDecimal.ZERO;
-        Locale locale = new Locale("pt", "BR");
-        for (Funcionario funcionario : funcionarios) {
-            totalSalarios = totalSalarios.add(funcionario.getSalario());
-        }
-        String total = NumberFormat.getCurrencyInstance(locale).format(totalSalarios);
-        System.out.println(total);
     }
 
     public void imprimeFuncionarioOrdemAlfabetica() {
@@ -76,12 +50,6 @@ public class GestorService {
         porFuncao.forEach((funcao, funcionarios) -> {
             System.out.println(funcao);
             funcionarios.forEach(System.out::println);
-        });
-    }
-
-    public void aumentoSalario() {
-        funcionarios.forEach(funcionario -> {
-            funcionario.adicionarAumento(aumento);
         });
     }
 

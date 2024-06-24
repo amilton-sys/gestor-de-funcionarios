@@ -49,4 +49,8 @@ public class Funcionario extends Pessoa {
                 Funcao: %s
                 """, super.getNome(), super.getDataNascimento().format(dtf), salario, getFuncao());
     }
+
+    public void setSalario(BigDecimal add) {
+        this.salario = this.salario.add(add);
+    }
 }
