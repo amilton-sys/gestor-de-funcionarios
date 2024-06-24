@@ -4,17 +4,21 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.Locale;
 
 public class Formater {
-    public static String fromMoedaBRL(BigDecimal salario) {
-        Locale locale = new Locale("pt", "BR");
-        return NumberFormat.getCurrencyInstance(locale).format(salario);
+
+    private final static Locale locale = new Locale("pt", "BR");
+
+    public static BigDecimal toBigDecimal(String salarioText) {
+       return new BigDecimal(salarioText.replace(",", "."));
     }
 
-    public static String fromDataBRL(LocalDate data) {
-        DateTimeFormatter  dtf = new DateTimeFormatterBuilder().appendPattern("dd/MM/yyyy").toFormatter();
-        return data.format(dtf);
+    public static LocalDate toDate(String dataText) {
+       return LocalDate.parse(dataText, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    public static String toStringBRL(BigDecimal salario) {
+        return NumberFormat.getCurrencyInstance(locale).format(salario);
     }
 }

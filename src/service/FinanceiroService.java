@@ -7,12 +7,12 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class FinanceiroService {
-    private BigDecimal aumento = new BigDecimal("0,1");
-    private BigDecimal salarioMinimo = new BigDecimal("1212.00");
+    private final BigDecimal aumento = new BigDecimal("0.1");
+    private final BigDecimal salarioMinimo = new BigDecimal("1212.00");
 
     public void adicionarAumento(Funcionario funcionario) {
-        BigDecimal valorAumento = funcionario.getSalario().multiply(aumento);
-        funcionario.setSalario(funcionario.getSalario().add(valorAumento));
+        BigDecimal valorAumento = funcionario.getSalario().multiply(this.aumento);
+        funcionario.adicionarAumento(valorAumento);
     }
 
     public void imprimeQuantidadeSalariosMinimos(List<Funcionario> funcionarios) {
@@ -28,8 +28,7 @@ public class FinanceiroService {
         for (Funcionario funcionario : funcionarios) {
             salarios = salarios.add(funcionario.getSalario());
         }
-        String totalSalarios = Formater.fromMoedaBRL(salarios);
-        System.out.println(totalSalarios);
+        System.out.println(Formater.toStringBRL(salarios));
     }
 
     public void aumentoSalario(List<Funcionario> funcionarios) {
