@@ -10,16 +10,19 @@ public enum Funcao {
     ELETRICISTA("Eletricista");
 
     private String funcao;
+
     Funcao(String funcao) {
         this.funcao = funcao;
     }
+
     public String getFuncao() {
         return funcao;
     }
-    public String getFuncao(String funcao) {
+
+    public static Funcao getFuncao(String funcao) {
         for (Funcao value : values()) {
-            if (value.getFuncao().equals(funcao)) {
-                return value.getFuncao();
+            if (value.getFuncao().equalsIgnoreCase(funcao)) {
+                return  value;
             }
         }
         return null;

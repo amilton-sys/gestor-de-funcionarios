@@ -1,5 +1,6 @@
 package model;
 
+
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.time.LocalDate;
@@ -19,8 +20,7 @@ public class Funcionario extends Pessoa {
     }
 
     public void adicionarAumento(BigDecimal aumento) {
-        BigDecimal valorAumento = getSalario().multiply(aumento);
-        this.salario = this.salario.add(valorAumento);
+        this.salario = this.salario.add(aumento);
     }
 
     public BigDecimal getSalario() {
@@ -31,7 +31,7 @@ public class Funcionario extends Pessoa {
         return funcao;
     }
 
-    public int pegaIdade(){
+    public int pegaIdade() {
         LocalDate dataNascimento = getDataNascimento();
         LocalDate hoje = LocalDate.now();
         return Period.between(dataNascimento, hoje).getYears();
@@ -45,12 +45,9 @@ public class Funcionario extends Pessoa {
         return String.format("""
                 Nome: %s
                 Data de nascimento: %s
-                Salario: %s
-                Funcao: %s
+                Salário: %s
+                Função: %s
                 """, super.getNome(), super.getDataNascimento().format(dtf), salario, getFuncao());
     }
 
-    public void setSalario(BigDecimal add) {
-        this.salario = this.salario.add(add);
-    }
 }
